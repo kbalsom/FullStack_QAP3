@@ -1,24 +1,16 @@
 const dal = require("./db");
+const express = require("express");
+const { client } = require("./db");
+const { render } = require("ejs");
 
-//get all awards.
-var getAwards = function () {
-  if (DEBUG) console.log("awards.dal.getAwards()");
-  return new Promise(function (resolve, reject) {
-    const sql = "SELECT award_id, name FROM award;";
-    //   ORDER BY award_id DESC LIMIT 7;"
-    if (DEBUG) console.log(sql);
-    dal.query(sql, [], (err, result) => {
-      if (err) {
-        // logging should go here
-        if (DEBUG) console.log(err);
-        reject(err);
-      } else {
-        resolve(result.rows);
-      }
-    });
-  });
-};
+const app = express();
+
+async function getMovies() {
+  const movies = await client.db("sample_mflix").collection("movies").find();
+  const results = await movies.toArray();
+  return results;
+}
 
 module.exports = {
-  getAwards,
+  getMovies,
 };

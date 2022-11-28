@@ -13,11 +13,11 @@ app.use(express.urlencoded({ extended: true })); // This is important!
 app.use(methodOverride("_method")); // So is this!
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { name: "Purple Monkey was here" });
+  res.render("index.ejs", { name: "Kara" });
 });
 
-const awardsRouter = require("./routes/movies");
-app.use("/movies", awardsRouter);
+const MoviesRouter = require("./routes/movies");
+app.use("/movies", MoviesRouter);
 
 // // anything beginning with "/api" will go into this
 const apiRouter = require("./routes/movies");
