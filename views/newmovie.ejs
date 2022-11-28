@@ -2,16 +2,13 @@
     <%- include('./partials/head.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
-        <div class="movies genre">
-            <form action="/movies" method="GET">
-                <b>Search By Genre: </b></br> 
-            <% if (theMovies.length > 0) { %>
-                <% theMovies.forEach(movies => { %>
+        <div class="movies content">
+            <form action="/newmovies" method="POST">
+                <b>Movies: </b></br> 
+            <% if (newMovie.length > 0) { %>
+                <% newMovie.forEach(movies => { %>
                     <b><%= movies.title %></b>
                     <b><%= movies.genres %></b>
-                    <a href="/edit/<%=movies.movies_id%>/edit?name=<%=movies.title%>">edit</a>
-                    <a href="/movie/<%=movies.movies%>/edit?name=<%=movies.title%>">delete</a>
-                    <a href="/movie/<%=movies.movies_id%>/edit?name=<%=movies.title%>">replace</a></br> 
                     <% }) %>
             <% } %>
             </br><label>Add Movie:</label></br>

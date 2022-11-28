@@ -23,6 +23,9 @@ app.use("/movies", MoviesRouter);
 const apiRouter = require("./routes/movies");
 app.use("/api/movies", apiRouter);
 
+const newMovieRouter = require("./routes/newmovie");
+app.use("/newmovie", newMovieRouter);
+
 app.use((req, res) => {
   res.status(404).render("404");
   console.log("second");

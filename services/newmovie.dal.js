@@ -5,12 +5,12 @@ const { render } = require("ejs");
 
 const app = express();
 
-async function getMovies() {
-  const movies = await client.db("sample_mflix").collection("films").find();
-  const results = await movies.toArray();
+async function addNewMovie() {
+  const newMovie = await client.db("sample_mflix").collection("films").find();
+  const results = await newMovie.toArray();
   return results;
 }
 
 module.exports = {
-  getMovies,
+  addNewMovie,
 };

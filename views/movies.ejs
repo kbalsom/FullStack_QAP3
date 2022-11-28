@@ -7,6 +7,7 @@
                 <b>Movies: </b></br> 
             <% if (theMovies.length > 0) { %>
                 <% theMovies.forEach(movies => { %>
+                    <b><%= movies._id %></b>
                     <b><%= movies.title %></b>
                     <b><%= movies.genres %></b>
                     <a href="/edit/<%=movies.movies_id%>/edit?name=<%=movies.title%>">edit</a>
@@ -14,12 +15,6 @@
                     <a href="/movie/<%=movies.movies_id%>/edit?name=<%=movies.title%>">replace</a></br> 
                     <% }) %>
             <% } %>
-            </br><label>Add Movie:</label></br>
-            <label>Name:
-                <input type="text" id="name" name="name" value="<%= locals.name %>" required>
-            </label>
-            </br>
-            <button>POST</button>
         </form>
         </div>
     </body>
