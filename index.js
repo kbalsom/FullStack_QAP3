@@ -16,12 +16,12 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { name: "Purple Monkey was here" });
 });
 
-const awardsRouter = require("./routes/awards");
-app.use("/awards", awardsRouter);
+const awardsRouter = require("./routes/movies");
+app.use("/movies", awardsRouter);
 
 // // anything beginning with "/api" will go into this
-const apiRouter = require("./routes/awards");
-app.use("/api/awards", apiRouter);
+const apiRouter = require("./routes/movies");
+app.use("/api/movies", apiRouter);
 
 app.use((req, res) => {
   res.status(404).render("404");

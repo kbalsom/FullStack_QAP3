@@ -1,0 +1,4 @@
+1.	As a dvdrentals customer I can see a web page listing all the awards from the dvdrental database.
+2.	As a dvdrentals business partner I can fetch all the awards from the dvdrental database from a REST API. The records will be returned as json data.
+3.	As a dvdrentals staff member I can see a web page that will allow me to add a new item to the awards of the dvdrental database.
+4. As a system administrator I want to ensure a 503 error is caught and logged
