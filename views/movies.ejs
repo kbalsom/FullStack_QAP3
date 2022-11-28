@@ -2,19 +2,19 @@
     <%- include('./partials/head.ejs') %>
     <body>
         <%- include('./partials/nav.ejs') %>
-        <div class="awards content">
-            <form action="/awards" method="POST">
-                <b>Awards: </b></br> 
-            <% if (theAwards.length > 0) { %>
-                <% theAwards.forEach(movies => { %>
+        <div class="movies content">
+            <form action="/movies" method="POST">
+                <b>Movies: </b></br> 
+            <% if (theMovies.length > 0) { %>
+                <% theMovies.forEach(movies => { %>
                     <b><%= movies.title %></b>
                     <b><%= movies.genres %></b>
                     <a href="/edit/<%=movies.movies_id%>/edit?name=<%=movies.title%>">edit</a>
-                    <a href="/award/<%=movies.movies%>/edit?name=<%=movies.title%>">delete</a>
-                    <a href="/award/<%=movies.movies_id%>/edit?name=<%=movies.title%>">replace</a></br> 
+                    <a href="/movie/<%=movies.movies%>/edit?name=<%=movies.title%>">delete</a>
+                    <a href="/movie/<%=movies.movies_id%>/edit?name=<%=movies.title%>">replace</a></br> 
                     <% }) %>
             <% } %>
-            </br><label>Add Award:</label></br>
+            </br><label>Add Movie:</label></br>
             <label>Name:
                 <input type="text" id="name" name="name" value="<%= locals.name %>" required>
             </label>

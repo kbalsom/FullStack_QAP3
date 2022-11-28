@@ -16,7 +16,7 @@ module.exports = {
       }
       // This was my connection to the mongoDB in compass that was needed for postman in DB course
       //  dbConnection = db.db("fall_2022_test");
-      console.log("DT has successfully connected to MongoDB.");
+      console.log("Successfully connected to MongoDB.");
 
       return callback();
     });
