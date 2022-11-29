@@ -16,14 +16,16 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { name: "Kara" });
 });
 
+// app.get("/put", (req, res) => {
+//   res.render("put.ejs");
+// });
+
 const MoviesRouter = require("./routes/movies");
-app.use("/movies", MoviesRouter);
-
-// // anything beginning with "/api" will go into this
 const apiRouter = require("./routes/movies");
-app.use("/api/movies", apiRouter);
-
 const newMovieRouter = require("./routes/newmovie");
+
+app.use("/movies", MoviesRouter);
+app.use("/api/movies", apiRouter);
 app.use("/newmovie", newMovieRouter);
 
 app.use((req, res) => {

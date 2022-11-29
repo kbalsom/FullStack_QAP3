@@ -3,7 +3,7 @@
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="movies content">
-            <form action="/movies" method="POST">
+            <form action="/movies" method="GET">
                 <b>Movies: </b></br> 
             <% if (theMovies.length > 0) { %>
                 <% theMovies.forEach(movies => { %>
