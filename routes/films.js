@@ -20,9 +20,8 @@ router.get("/", async (req, res) => {
     if (DEBUG) console.table(theFilms);
     res.render("films", { theFilms });
   } catch {
-    res.statusCode(503);
+    res.statusCode(503).res.render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
-    res.render("503");
   }
 });
 
@@ -35,9 +34,8 @@ router.get("/:id", async (req, res) => {
     if (film.length === 0) res.render("norecord");
     else res.render("film", { film });
   } catch {
-    res.statusCode(503);
+    res.statusCode(503).res.render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
-    res.render("503");
   }
 });
 
@@ -69,39 +67,35 @@ router.get("/:id/delete", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  if (DEBUG) console.log("film.POST");
+  if (DEBUG) console.log("films.POST");
   try {
     await filmsDal.addFilm(req.body.title, req.body.year);
     res.redirect("/films/");
   } catch {
-    res.statusCode(503);
+    res.statusCode(503).res.render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
-    res.render("503");
   }
 });
-
-// PUT, PATCH, and DELETE are part of HTTP, not a part of HTML
-// Therefore, <form method="PUT" ...> doesn't work, but it does work for RESTful API
 
 router.put("/:id", async (req, res) => {
   if (DEBUG) console.log("films.PUT: " + req.params.id);
   try {
-    await filmsDal.putFilms(req.params.id, req.body.title, req.body.year);
+    await filmsDal.putFilm(req.params.id, req.body.title, req.body.year);
     res.redirect("/films/");
   } catch {
     res.status(503).render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
   }
 });
+
 router.patch("/:id", async (req, res) => {
   if (DEBUG) console.log("films.PATCH: " + req.params.id);
   try {
     await filmsDal.patchFilm(req.params.id, req.body.title, req.body.year);
     res.redirect("/films/");
   } catch {
-    res.statusCode(503);
+    res.statusCode(503).res.render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
-    res.render("503");
   }
 });
 router.delete("/:id", async (req, res) => {
@@ -110,9 +104,8 @@ router.delete("/:id", async (req, res) => {
     await filmsDal.deleteFilm(req.params.id);
     res.redirect("/films/");
   } catch {
-    res.statusCode(503);
+    res.statusCode(503).res.render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
-    res.render("503");
   }
 });
 
