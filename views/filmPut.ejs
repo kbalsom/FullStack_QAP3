@@ -1,0 +1,16 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="create content">
+            <form action="/films/<%= locals.theId %>?_method=PUT" method="POST">
+                <label>Replace Film Data:</br>
+                    <input type="text" name="title" value="<%= locals.title %>" required>
+                    <input type="text" name="year" value="<%= locals.year %>" required>
+                </label></br>
+                <button>PUT</button>
+            </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>

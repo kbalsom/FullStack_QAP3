@@ -3,9 +3,9 @@
     <body>
         <%- include('./partials/nav.ejs') %>
         <div class="create content">
-            <form action="/actors/<%= locals.theId %>?_method=DELETE" method="POST">
-                <label>Are you sure you want to delete this Actor?</br>
-                    <input type="text" id="<%= locals.theId %>" name="actor" value="<%= locals.firstName %> <%= locals.lastName %>" readonly>
+            <form action="/films/<%= locals.theId %>?_method=DELETE" method="POST">
+                <label>Are you sure you want to delete this Film?</br>
+                    <input type="text" id="<%= locals.theId %>" name="film" value="<%= locals.title %> <%= locals.year %>" readonly>
                 </label>
                 <button>DELETE</button>
             </form>

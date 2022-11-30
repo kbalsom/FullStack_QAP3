@@ -1,29 +1,27 @@
 var router = require("express").Router();
-//const actorsDal = require('../../services/pg.actors.dal')
-const actorsDal = require("../../services/m.actors.dal");
+const filmsDal = require("../../services/m.films.dal");
 
-// api/actors
 router.get("/", async (req, res) => {
-  if (DEBUG) console.log("ROUTE: /api/actors/ GET " + req.url);
+  if (DEBUG) console.log("ROUTE: /api/films/ GET " + req.url);
   try {
-    let theActors = await actorsDal.getActors();
-    res.json(theActors);
+    let theFilms = await filmsDal.getFilms();
+    res.json(theFilms);
   } catch {
     // log this error to an error log file.
     res.statusCode = 503;
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
-// api/actors/:id
+
 router.get("/:id", async (req, res) => {
-  if (DEBUG) console.log("ROUTE: /api/actors/:id GET " + req.url);
+  if (DEBUG) console.log("ROUTE: /api/films/:id GET " + req.url);
   try {
-    let anActor = await actorsDal.getActorByActorId(req.params.id);
-    if (anActor.length === 0) {
+    let aFilm = await filmsDal.getFilmByFilmId(req.params.id);
+    if (aFilm.length === 0) {
       // log this error to an error log file.
       res.statusCode = 404;
       res.json({ message: "Not Found", status: 404 });
-    } else res.json(anActor);
+    } else res.json(aFilm);
   } catch {
     // log this error to an error log file.
     res.statusCode = 503;
@@ -32,11 +30,11 @@ router.get("/:id", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   if (DEBUG) {
-    console.log("ROUTE: /api/actors/ POST");
+    console.log("ROUTE: /api/films/ POST");
     //    console.log(req);
   }
   try {
-    await actorsDal.addActor(req.body.firstName, req.body.lastName);
+    await filmsDal.addFilm(req.body.title, req.body.year);
     res.statusCode = 201;
     res.json({ message: "Created", status: 201 });
   } catch {
@@ -45,14 +43,11 @@ router.post("/", async (req, res) => {
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
+
 router.put("/:id", async (req, res) => {
-  if (DEBUG) console.log("ROUTE: /api/actors PUT " + req.params.id);
+  if (DEBUG) console.log("ROUTE: /api/films PUT " + req.params.id);
   try {
-    await actorsDal.putActor(
-      req.params.id,
-      req.body.firstName,
-      req.body.lastName
-    );
+    await filmsDal.putFilm(req.params.id, req.body.title, req.body.year);
     res.statusCode = 200;
     res.json({ message: "OK", status: 200 });
   } catch {
@@ -62,13 +57,9 @@ router.put("/:id", async (req, res) => {
   }
 });
 router.patch("/:id", async (req, res) => {
-  if (DEBUG) console.log("ROUTE: /api/actors PATCH " + req.params.id);
+  if (DEBUG) console.log("ROUTE: /api/films PATCH " + req.params.id);
   try {
-    await actorsDal.patchActor(
-      req.params.id,
-      req.body.firstName,
-      req.body.lastName
-    );
+    await filmsDal.patchFilm(req.params.id, req.body.title, req.body.year);
     res.statusCode = 200;
     res.json({ message: "OK", status: 200 });
   } catch {
@@ -78,9 +69,9 @@ router.patch("/:id", async (req, res) => {
   }
 });
 router.delete("/:id", async (req, res) => {
-  if (DEBUG) console.log("ROUTE: /api/actors DELETE " + req.params.id);
+  if (DEBUG) console.log("ROUTE: /api/films DELETE " + req.params.id);
   try {
-    await actorsDal.deleteActor(req.params.id);
+    await filmsDal.deleteFilm(req.params.id);
     res.statusCode = 200;
     res.json({ message: "OK", status: 200 });
   } catch {

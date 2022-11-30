@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 // const actorsDal = require('../services/pg.actors.dal')
-const actorsDal = require("../services/m.actors.dal");
+const filmsDal = require("../services/m.films.dal");
 
 router.get("/", async (req, res) => {
   // const theActors = [
@@ -10,9 +10,9 @@ router.get("/", async (req, res) => {
   //     {first_name: 'Regina', last_name: 'King'}
   // ];
   try {
-    let theActors = await actorsDal.getActors();
-    if (DEBUG) console.table(theActors);
-    res.render("actors", { theActors });
+    let theFilms = await filmsDal.getFilms();
+    if (DEBUG) console.table(theFilms);
+    res.render("films", { theFilms });
   } catch {
     res.render("503");
   }
@@ -23,46 +23,46 @@ router.get("/:id", async (req, res) => {
   //     {first_name: 'Regina', last_name: 'King'}
   // ];
   try {
-    let anActor = await actorsDal.getActorByActorId(req.params.id); // from postgresql
-    if (anActor.length === 0) res.render("norecord");
-    else res.render("actor", { anActor });
+    let film = await filmsDal.getFilmByFilmId(req.params.id);
+    if (film.length === 0) res.render("norecord");
+    else res.render("film", { film });
   } catch {
     res.render("503");
   }
 });
 
 router.get("/:id/replace", async (req, res) => {
-  if (DEBUG) console.log("actor.Replace : " + req.params.id);
-  res.render("actorPut.ejs", {
-    firstName: req.query.firstName,
-    lastName: req.query.lastName,
+  if (DEBUG) console.log("film.Replace : " + req.params.id);
+  res.render("filmPut.ejs", {
+    title: req.query.title,
+    year: req.query.year,
     theId: req.params.id,
   });
 });
 
 router.get("/:id/edit", async (req, res) => {
-  if (DEBUG) console.log("actor.Edit : " + req.params.id);
-  res.render("actorPatch.ejs", {
-    firstName: req.query.firstName,
-    lastName: req.query.lastName,
+  if (DEBUG) console.log("film.Edit : " + req.params.id);
+  res.render("filmPatch.ejs", {
+    title: req.query.title,
+    year: req.query.year,
     theId: req.params.id,
   });
 });
 
 router.get("/:id/delete", async (req, res) => {
-  if (DEBUG) console.log("actor.Delete : " + req.params.id);
-  res.render("actorDelete.ejs", {
-    firstName: req.query.firstName,
-    lastName: req.query.lastName,
+  if (DEBUG) console.log("film.Delete : " + req.params.id);
+  res.render("filmDelete.ejs", {
+    title: req.query.title,
+    year: req.query.year,
     theId: req.params.id,
   });
 });
 
 router.post("/", async (req, res) => {
-  if (DEBUG) console.log("actors.POST");
+  if (DEBUG) console.log("film.POST");
   try {
-    await actorsDal.addActor(req.body.firstName, req.body.lastName);
-    res.redirect("/actors/");
+    await filmsDal.addFilm(req.body.title, req.body.year);
+    res.redirect("/films/");
   } catch {
     // log this error to an error log file.
     res.render("503");
@@ -73,38 +73,30 @@ router.post("/", async (req, res) => {
 // Therefore, <form method="PUT" ...> doesn't work, but it does work for RESTful API
 
 router.put("/:id", async (req, res) => {
-  if (DEBUG) console.log("actors.PUT: " + req.params.id);
+  if (DEBUG) console.log("films.PUT: " + req.params.id);
   try {
-    await actorsDal.putActor(
-      req.params.id,
-      req.body.firstName,
-      req.body.lastName
-    );
-    res.redirect("/actors/");
+    await filmsDal.putFilm(req.params.id, req.body.title, req.body.year);
+    res.redirect("/films/");
   } catch {
     // log this error to an error log file.
     res.render("503");
   }
 });
 router.patch("/:id", async (req, res) => {
-  if (DEBUG) console.log("actors.PATCH: " + req.params.id);
+  if (DEBUG) console.log("films.PATCH: " + req.params.id);
   try {
-    await actorsDal.patchActor(
-      req.params.id,
-      req.body.firstName,
-      req.body.lastName
-    );
-    res.redirect("/actors/");
+    await filmsDal.patchFilm(req.params.id, req.body.title, req.body.year);
+    res.redirect("/films/");
   } catch {
     // log this error to an error log file.
     res.render("503");
   }
 });
 router.delete("/:id", async (req, res) => {
-  if (DEBUG) console.log("actors.DELETE: " + req.params.id);
+  if (DEBUG) console.log("films.DELETE: " + req.params.id);
   try {
-    await actorsDal.deleteActor(req.params.id);
-    res.redirect("/actors/");
+    await filmsDal.deleteFilm(req.params.id);
+    res.redirect("/films/");
   } catch {
     // log this error to an error log file.
     res.render("503");
