@@ -17,9 +17,11 @@ app.get("/about", (request, response) => {
 });
 
 const filmsRouter = require("./routes/films");
+const custRouter = require("./routes/customer");
 const apiRouter = require("./routes/api");
 
 app.use("/films", filmsRouter);
+app.use("/customer", custRouter);
 app.use("/api", apiRouter);
 
 app.use((req, res) => {
