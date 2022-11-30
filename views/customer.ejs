@@ -1,0 +1,17 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        <div class="films content">
+            <form action="/films" method="POST">
+                <b>Films: </b></br> 
+            <% if (theFilms.length > 0) { %>
+                <% theFilms.forEach(film => { %>
+                    <b><%= film.title %> <%= film.year %></b></br>
+                    <% }) %>
+            <% } %>
+        </form>
+        </div>
+    </body>
+    <%- include('./partials/foot.ejs') %>
+</html>
