@@ -2,12 +2,11 @@
 
 const express = require("express");
 const router = express.Router();
-const moviesDal = require("../services/movies.dal");
+const moviesDal = require("../services/m.movies.dal");
 
 router.get("/", async (req, res) => {
   try {
-    let theMovies = await moviesDal.getMovies(); // from Mongo not from postgresql
-    // res.json(theAwards); // this will display my json data in full
+    let theMovies = await moviesDal.getFilms();
     res.render("movies", { theMovies });
   } catch {
     res.render("503");

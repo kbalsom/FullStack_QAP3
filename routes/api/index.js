@@ -1,9 +1,10 @@
 var router = require("express").Router();
 
 if (DEBUG) {
-  console.log("ROUTE: /api/movies");
+  console.log("ROUTE: /api/actors");
 }
 
-router.use("/movies", require("./movies"));
+const actorsRouter = require("./actors");
+router.use("/actors", actorsRouter);
 
 module.exports = router;

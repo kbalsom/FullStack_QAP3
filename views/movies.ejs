@@ -7,13 +7,7 @@
                 <b>Movies: </b></br> 
             <% if (theMovies.length > 0) { %>
                 <% theMovies.forEach(movies => { %>
-                    <b><%= movies._id %></b>
                     <b><%= movies.title %></b>
-                    <b><%= movies.genres %></b>
-                    <a href="/edit/<%=movies.movies_id%>/edit?name=<%=movies.title%>">edit</a>
-                    <a href="/movie/<%=movies.movies%>/edit?name=<%=movies.title%>">delete</a>
-                    <a href="/movie/<%=movies.movies_id%>/edit?name=<%=movies.title%>">replace</a></br> 
-                    <% }) %>
             <% } %>
         </form>
         </div>
