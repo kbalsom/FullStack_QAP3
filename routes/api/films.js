@@ -1,34 +1,45 @@
 var router = require("express").Router();
 //const actorsDal = require('../../services/pg.actors.dal')
 const filmsDal = require("../../services/m.films.dal");
+const http = require("http");
+const EventEmitter = require("events"); //Imports the global events module, and assigns it to the constant EventEmiter.
+class MyEmitter extends EventEmitter {} //Creates a class MyEmitter, that inherits the properties of EventEmiiter.
+const myEmitter = new MyEmitter();
+const logger = require("../../logger.js");
 
-// api/actors
+logger.fileOps();
+
+myEmitter.addListener("status", (msg) => {
+  console.log(msg);
+  logger.addToFile(msg);
+});
+
 router.get("/", async (req, res) => {
   if (DEBUG) console.log("ROUTE: /api/films/ GET " + req.url);
   try {
     let theFilms = await filmsDal.getFilms();
     res.json(theFilms);
   } catch {
-    // log this error to an error log file.
     res.statusCode = 503;
+    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
-// api/actors/:id
+
 router.get("/:id", async (req, res) => {
   if (DEBUG) console.log("ROUTE: /api/films/:id GET " + req.url);
   console.log(req.params.id);
   try {
     let film = await filmsDal.getFilmByFilmId(req.params.id);
     if (film.length === 0) {
-      // log this error to an error log file.
       res.statusCode = 404;
+      myEmitter.emit("status", `Status Code: ${res.statusCode}`);
       res.json({ message: "Not Found", status: 404 });
     } else console.log(film);
     res.json(film);
   } catch {
-    // log this error to an error log file.
     res.statusCode = 503;
+    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
@@ -36,15 +47,14 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   if (DEBUG) {
     console.log("ROUTE: /api/films/ POST");
-    //    console.log(req);
   }
   try {
     await filmsDal.addFilm(req.body.title, req.body.year);
     res.statusCode = 201;
     res.json({ message: "Created", status: 201 });
   } catch {
-    // log this error to an error log file.
     res.statusCode = 503;
+    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
@@ -55,8 +65,8 @@ router.put("/:id", async (req, res) => {
     res.statusCode = 200;
     res.json({ message: "OK", status: 200 });
   } catch {
-    // log this error to an error log file.
     res.statusCode = 503;
+    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
@@ -67,8 +77,8 @@ router.patch("/:id", async (req, res) => {
     res.statusCode = 200;
     res.json({ message: "OK", status: 200 });
   } catch {
-    // log this error to an error log file.
     res.statusCode = 503;
+    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
@@ -79,12 +89,12 @@ router.delete("/:id", async (req, res) => {
     res.statusCode = 200;
     res.json({ message: "OK", status: 200 });
   } catch {
-    // log this error to an error log file.
     res.statusCode = 503;
+    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
     res.json({ message: "Service Unavailable", status: 503 });
   }
 });
-// list the active api routes
+
 if (DEBUG) {
   router.stack.forEach(function (r) {
     if (r.route && r.route.path) {
