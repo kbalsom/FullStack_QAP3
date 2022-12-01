@@ -19,7 +19,7 @@ async function getFilmByFilmId(id) {
     await dal.connect();
     const result = dal
       .db("sample_mflix")
-      .collection("film")
+      .collection("films")
       .findOne({ _id: ObjectId(id) });
     return result;
   } catch (error) {
