@@ -6,7 +6,7 @@
             <form action="/films" method="POST">
                 <b>Films: </b></br> 
             <% if (theFilms.length > 0) { %>
-                <% theFilms.forEach(film => { %>
+                <% theFilms.reverse().forEach(film => { %>
                     <b><%= film.title %> <%= film.year %></b>
                     <a href="/films/<%=film._id%>/edit?title=<%=film.title%>&year=<%=film.year%>">edit</a>
                     <a href="/films/<%=film._id%>/delete?title=<%=film.title%>&year=<%=film.year%>">delete</a>
