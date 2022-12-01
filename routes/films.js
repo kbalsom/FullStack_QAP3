@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const actorsDal = require('../services/pg.actors.dal')
 const filmsDal = require("../services/m.films.dal");
 const http = require("http");
 const EventEmitter = require("events"); //Imports the global events module, and assigns it to the constant EventEmiter.

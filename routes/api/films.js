@@ -51,6 +51,7 @@ router.post("/", async (req, res) => {
   try {
     await filmsDal.addFilm(req.body.title, req.body.year);
     res.statusCode = 201;
+    console.log(req.body.title, req.body.year);
     res.json({ message: "Created", status: 201 });
   } catch {
     res.statusCode = 503;
