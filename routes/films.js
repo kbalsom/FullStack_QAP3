@@ -26,9 +26,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  // const anActor = [
-  //     {first_name: 'Regina', last_name: 'King'}
-  // ];
   try {
     let film = await filmsDal.getFilmByFilmId(req.params.id);
     if (film.length === 0) res.render("norecord");
