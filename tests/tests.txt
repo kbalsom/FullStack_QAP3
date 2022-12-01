@@ -1,4 +1,4 @@
-1.	As a dvdrentals customer I can see a web page listing all the awards from the dvdrental database.
-2.	As a dvdrentals business partner I can fetch all the awards from the dvdrental database from a REST API. The records will be returned as json data.
-3.	As a dvdrentals staff member I can see a web page that will allow me to add a new item to the awards of the dvdrental database.
-4.  As a system administrator I want to ensure a 503 error is caught and logged
+1.	Customers can click on the [Customers] link in the nav, or follow the route "http://localhost:3000/customer"  to view a list of all available films. 
+2.	Staff can click on the [Staff] link in the nav, or follow the route "http://localhost:3000/staff"  to view a list of all available films, and add, edit, replace, and/or delete films from the list. 
+3.	Business partners can click on the [API] link in the nav, or follow the route "http://localhost:3000/api/films"  to view a list of all available films in json data from the API. They can also get by id by adding an id to the end of the "http://localhost:3000/api/films/" route, or perform GET, PUT, PATCH, or DELETE through the API. 
+4.  System Administrators can view any 503 errors that occur on a certain date by selecting the folder labelled the month year they are looking for, and selecting the file labelled as the date they are looking for. 

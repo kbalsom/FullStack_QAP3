@@ -11,7 +11,7 @@
         <%- include('./partials/nav.ejs') %>
         <div class="actors content">
             <form action="/films" method="POST">
-                <b>FILMS: 
+            </br><h2><u>EDIT FILMS</u></h2>
             </br><label>Add Film:</label></br>
             <label>Title:
                 <input type="text" id="title" name="title" value="<%= locals.title %>" required>
@@ -20,13 +20,13 @@
                 <input type="text" id="year" name="year" value="<%= locals.year %>" required>
             </label>
             </br></br>
-            <button>ADD</button></b></form></br>
+            <button class="btn btn-primary">ADD</button></b></form>
             <% if (theFilms.length > 0) { %>
                 <% theFilms.reverse().forEach(film => { %>
                     <b><%= film.title %> <%= film.year %></b>
-                    <a href="/films/<%=film._id%>/edit?title=<%=film.title%>&year=<%=film.year%>">edit</a>
-                    <a href="/films/<%=film._id%>/delete?title=<%=film.title%>&year=<%=film.year%>">delete</a>
-                    <a href="/films/<%=film._id%>/replace?title=<%=film.title%>&year=<%=film.year%>">replace</a></br> 
+                    <a href="/films/<%=film._id%>/edit?title=<%=film.title%>&year=<%=film.year%>">EDIT</a>
+                    <a href="/films/<%=film._id%>/replace?title=<%=film.title%>&year=<%=film.year%>">REPLACE</a> 
+                    <a href="/films/<%=film._id%>/delete?title=<%=film.title%>&year=<%=film.year%>">DELETE</a></br>
                     <% }) %>
             <% } %>
         </form>

@@ -11,7 +11,7 @@ crossorigin="anonymous"
         <%- include('./partials/nav.ejs') %>
         <div class="films content">
             <form action="/films" method="POST">
-            </br><b>Films: </b></br></br>
+            </br><h2><u>ALL AVAILABLE FILMS</u></h2></br>
             <% if (theFilms.length > 0) { %>
                 <% theFilms.forEach(film => { %>
                     <b><%= film.title %> <%= film.year %></b></br>
