@@ -1,3 +1,4 @@
+TEST CASES FOR THIS APP:
 1.	Customers can click on the [Customers] link in the nav, or follow the route "http://localhost:3000/customer"  to view a list of all available films. 
 2.	Staff can click on the [Staff] link in the nav, or follow the route "http://localhost:3000/staff"  to view a list of all available films, and add, edit, replace, and/or delete films from the list. 
 3.	Business partners can click on the [API] link in the nav, or follow the route "http://localhost:3000/api/films"  to view a list of all available films in json data from the API. They can also get by id by adding an id to the end of the "http://localhost:3000/api/films/" route, or perform GET, PUT, PATCH, or DELETE through the API. 
