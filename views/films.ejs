@@ -12,7 +12,7 @@
         <div class="actors content">
             <form action="/films" method="POST">
             </br><h2><u>EDIT FILMS</u></h2>
-            </br><label>Add Film:</label></br>
+            </br><label>ADD FILM:</label></br>
             <label>Title:
                 <input type="text" id="title" name="title" value="<%= locals.title %>" required>
             </label></br>
@@ -29,7 +29,7 @@
                     <a href="/films/<%=film._id%>/delete?title=<%=film.title%>&year=<%=film.year%>">DELETE</a></br>
                     <% }) %>
             <% } %>
-        </form>
+        </form></br>
         </div>
     </body>
     <%- include('./partials/foot.ejs') %>

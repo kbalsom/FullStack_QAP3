@@ -30,7 +30,8 @@ router.get("/:id", async (req, res) => {
     if (film.length === 0) res.render("norecord");
     else res.render("film", { film });
   } catch {
-    res.statusCode(503).res.render("503");
+    res.statusCode = 503;
+    res.render("503");
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
   }
 });

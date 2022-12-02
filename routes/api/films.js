@@ -1,11 +1,12 @@
 var router = require("express").Router();
-//const actorsDal = require('../../services/pg.actors.dal')
 const filmsDal = require("../../services/m.films.dal");
-const http = require("http");
+var bodyParser = require("body-parser");
 const EventEmitter = require("events"); //Imports the global events module, and assigns it to the constant EventEmiter.
 class MyEmitter extends EventEmitter {} //Creates a class MyEmitter, that inherits the properties of EventEmiiter.
 const myEmitter = new MyEmitter();
 const logger = require("../../logger.js");
+
+router.use(bodyParser.json());
 
 logger.fileOps();
 
@@ -28,15 +29,13 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   if (DEBUG) console.log("ROUTE: /api/films/:id GET " + req.url);
-  console.log(req.params.id);
   try {
     let film = await filmsDal.getFilmByFilmId(req.params.id);
     if (film.length === 0) {
       res.statusCode = 404;
       myEmitter.emit("status", `Status Code: ${res.statusCode}`);
       res.json({ message: "Not Found", status: 404 });
-    } else console.log(film);
-    res.json(film);
+    } else res.json(film);
   } catch {
     res.statusCode = 503;
     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
@@ -51,7 +50,6 @@ router.post("/", async (req, res) => {
   try {
     await filmsDal.addFilm(req.body.title, req.body.year);
     res.statusCode = 201;
-    console.log(req.body.title, req.body.year);
     res.json({ message: "Created", status: 201 });
   } catch {
     res.statusCode = 503;
