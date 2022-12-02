@@ -13,12 +13,8 @@
             <form action="/films" method="POST">
             </br><h2><u>EDIT FILMS</u></h2>
             </br><label>ADD FILM:</label></br>
-            <label>Title:
-                <input type="text" id="title" name="title" value="<%= locals.title %>" required>
-            </label></br>
-            <label>Year:
-                <input type="text" id="year" name="year" value="<%= locals.year %>" required>
-            </label>
+                <input placeholder="Title" type="text" id="title" name="title" value="<%= locals.title %>" required></br>
+                <input placeholder="Year" type="text" id="year" name="year" value="<%= locals.year %>" required>
             </br></br>
             <button class="btn btn-primary">ADD</button></b></form>
             <% if (theFilms.length > 0) { %>
