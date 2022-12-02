@@ -1,4 +1,8 @@
+<!-- Written By: Kara Balsom
+Date Written: Nov 26, 2022 -->
+
 <html lang="en">
+<!-- Sets up the bootstrap: -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -6,9 +10,11 @@ rel="stylesheet"
 integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 crossorigin="anonymous"
 />
+<!-- Adds the header and nav from head.ejs and nav.ejs: -->
     <%- include('./partials/head.ejs') %>
     <body class="container text-center">
         <%- include('./partials/nav.ejs') %>
+        <!-- Set up a form to put films. The id, title, and year are taken in as a request, and sent to the films.js file in the routes folder, which calls the patchFilm() function in m.films.dal.js. The function sends back the results to films.js, which sends them back to here so the changes can be displayed in the list of films on films.ejs.  -->
         <div class="create content">
             <form action="/films/<%= locals.theId %>?_method=PATCH" method="POST">
             </br><h2><u>EDIT FILM ENTRY</u></h2></br>
@@ -19,5 +25,6 @@ crossorigin="anonymous"
             </form>
         </div>
     </body>
+    <!-- Adds the footer from foot.ejs: -->
     <%- include('./partials/foot.ejs') %>
 </html>
